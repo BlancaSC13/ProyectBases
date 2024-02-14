@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="320.0" prefWidth="454.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HospitalMedicos.BuscarHospitalMedicoController">
+   <center>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="440.0" style="-fx-background-color: white;">
+         <children>
+            <ImageView fitHeight="242.0" fitWidth="414.0" layoutX="13.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 0.5;">
+               <image>
+                  <Image url="@../../../images/istockphoto-1251319760-612x612.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="#39b8a7" layoutX="69.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Hospital-Medico">
+               <font>
+                  <Font name="Bodoni MT" size="30.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" layoutX="3.0" layoutY="52.0" prefHeight="168.0" prefWidth="435.0" spacing="45.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="24.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Dato:">
+                           <font>
+                              <Font name="Lucida Bright Demibold Italic" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Id Hospital:">
+                           <font>
+                              <Font name="Lucida Bright Demibold Italic" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Cédula:">
+                           <font>
+                              <Font name="Lucida Bright Demibold Italic" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="227.0" prefWidth="133.0" spacing="16.0">
+                     <children>
+                        <ComboBox fx:id="ComboBoxDato" prefWidth="150.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10;" />
+                        <TextField fx:id="TextFieldIDHospital" layoutX="10.0" layoutY="10.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
+                        <TextField fx:id="TextFieldCedula" layoutX="10.0" layoutY="74.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="202.0" layoutY="290.0" prefHeight="54.0" prefWidth="235.0" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#BtnBuscarOnAction" prefHeight="40.0" prefWidth="113.0" style="-fx-background-color: #063971; -fx-background-radius: 20 20 20 20; -fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Buscar" textFill="WHITE">
+                     <font>
+                        <Font name="Lucida Bright Demibold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#BtnCancelarOnAction" prefHeight="40.0" prefWidth="113.0" style="-fx-background-color: #063971; -fx-background-radius: 20 20 20 20; -fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Cancelar" textFill="WHITE">
+                     <font>
+                        <Font name="Lucida Bright Demibold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea fx:id="TextAreaInfo" layoutX="50.0" layoutY="186.0" prefHeight="102.0" prefWidth="347.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" />
+            <ImageView fitHeight="73.0" fitWidth="64.0" layoutX="3.0" layoutY="4.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Desktop/Imágenes%20Bases/78683436-icono-de-la-lupa-lupa-buscar-icono-de-color-estilo-plano-ilustración-vectorial.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
