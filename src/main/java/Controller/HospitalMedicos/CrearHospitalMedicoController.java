@@ -14,13 +14,14 @@ public class CrearHospitalMedicoController
     @javafx.fxml.FXML
     public void initialize() {
     }
+
     @FXML
     void BtnCancelarOnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void BtnLeerOnAction(ActionEvent event) {
+    void BtnCrearOnAction(ActionEvent event) {
 
     }
 }
