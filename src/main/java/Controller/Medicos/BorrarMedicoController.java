@@ -3,6 +3,7 @@ package Controller.Medicos;
 import DAO.HospitalDAO;
 import DAO.MedicoDAO;
 import Objects.Medico;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -27,8 +28,13 @@ public class BorrarMedicoController {
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
         int id_Obtenido = Integer.parseInt(TextFieldCedula.getText());
-        medicoDAO.borrarMedico(id_Obtenido);
-        mostrarMensaje("Medico borrado correctamente");
+        String respuesta = FXUtility.alertYesNo("Confimación", "Eliminar registro","¿Está seguro de eliminar el registro?");
+        if(respuesta.equals("YES")) {
+            medicoDAO.borrarMedico(id_Obtenido);
+            mostrarMensaje("Medico borrado correctamente");
+        }else{
+            mostrarMensaje("Registro no eliminado");
+        }
         limpiarCampos();
     }
 

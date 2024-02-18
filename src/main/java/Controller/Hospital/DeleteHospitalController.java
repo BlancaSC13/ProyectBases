@@ -2,6 +2,7 @@ package Controller.Hospital;
 
 import DAO.HospitalDAO;
 import Objects.Hospital;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,8 +25,13 @@ public class DeleteHospitalController {
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
         int id_Obtenido = Integer.parseInt(TextFieldIdHospital.getText());
-        hospitalDAO.borrarHospital(id_Obtenido);
-        mostrarMensaje("Hospital borrado correctamente");
+        String respuesta = FXUtility.alertYesNo("Confimación", "Eliminar registro","¿Está seguro de eliminar el registro?");
+        if(respuesta.equals("YES")) {
+            hospitalDAO.borrarHospital(id_Obtenido);
+            mostrarMensaje("Registro de hospital eliminado correctamente");
+        }else{
+            mostrarMensaje("Registro no eliminado");
+        }
         limpiarCampos();
 
     }

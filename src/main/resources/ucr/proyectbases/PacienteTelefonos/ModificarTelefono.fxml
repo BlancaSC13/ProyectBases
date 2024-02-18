@@ -35,7 +35,12 @@
                               <Font name="Lucida Bright Demibold Italic" size="15.0" />
                            </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Teléfono:">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Teléfono antiguo:">
+                           <font>
+                              <Font name="Lucida Bright Demibold Italic" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Teléfono:">
                            <font>
                               <Font name="Lucida Bright Demibold Italic" size="16.0" />
                            </font>
@@ -48,7 +53,8 @@
                   <VBox prefHeight="227.0" prefWidth="133.0" spacing="29.0">
                      <children>
                         <TextField fx:id="TextFieldCedula" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
-                        <TextField fx:id="TextFieldTelefono" layoutX="10.0" layoutY="10.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
+                        <TextField fx:id="TextFieldTelefonoViejo" layoutX="10.0" layoutY="10.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
+                        <TextField fx:id="TextFieldTelefono" layoutX="10.0" layoutY="74.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
                      </children>
                      <padding>
                         <Insets top="10.0" />

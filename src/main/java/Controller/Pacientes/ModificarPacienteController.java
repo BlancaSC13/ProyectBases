@@ -2,6 +2,7 @@ package Controller.Pacientes;
 
 import DAO.PacienteDAO;
 import Objects.Paciente;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -44,13 +45,19 @@ public class ModificarPacienteController {
         paciente.setApellido1(TextFieldPrimerApellido.getText());
         paciente.setApellido2(TextFieldSegundoApellido.getText());
         paciente.setFec_Nacimiento(TextFieldFecNA.getText());
-        if (pacienteDAO.actualizarPaciente(paciente)) {
-            mostrarMensaje("Registro de Paciente actualizado con éxito");
+        String respuesta = FXUtility.alertYesNo("Confirmación", "Modificar registro", "¿Está seguro que desea modificar este registro?");
+        if (respuesta.equals("YES")) {
+            if (pacienteDAO.actualizarPaciente(paciente)) {
+                mostrarMensaje("Registro de Paciente actualizado con éxito");
+            } else {
+                mostrarMensaje("No se pudo actualizar el registro del Paciente porque no existe.");
+            }
         } else {
-            mostrarMensaje("No se pudo actualizar el registro del Paciente porque no existe.");
+            mostrarMensaje("El registro no se ha actualizado");
         }
         limpiarCampos();
     }
+
     private void mostrarMensaje(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Información");
@@ -58,6 +65,7 @@ public class ModificarPacienteController {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
+
     private void limpiarCampos() {
         TextFieldCedula.clear();
         TextFieldNombre.clear();

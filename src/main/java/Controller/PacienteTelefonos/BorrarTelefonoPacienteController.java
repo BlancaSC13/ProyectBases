@@ -3,6 +3,7 @@ package Controller.PacienteTelefonos;
 import Conexion.Conexion;
 import DAO.TelefonoPacienteDAO;
 import Objects.TelefonoPaciente;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,8 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class BorrarTelefonoPacienteController
-{
+public class BorrarTelefonoPacienteController {
     @javafx.fxml.FXML
     private TextField TextFieldCedula;
     @javafx.fxml.FXML
@@ -25,13 +25,19 @@ public class BorrarTelefonoPacienteController
     @javafx.fxml.FXML
     public void initialize() {
     }
+
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
         telefonoPaciente.setCedula(Integer.parseInt(TextFieldCedula.getText()));
         telefonoPaciente.setTelefono(Integer.parseInt(TextFieldTelefono.getText()));
-        telefonoPacienteDAO.borrarTelefonoPaciente(telefonoPaciente);
-        mostrarMensaje("El número de teléfono se borró correctamente");
-        limpiarCampos();
+        String respuesta = FXUtility.alertYesNo("Confirmación", "Borrar Registro", "¿Está seguro de eliminar el registro?");
+        if (respuesta.equals("YES")) {
+            telefonoPacienteDAO.borrarTelefonoPaciente(telefonoPaciente);
+            mostrarMensaje("El número de teléfono se borró correctamente");
+            limpiarCampos();
+        } else {
+            mostrarMensaje("Registro no eliminado");
+        }
     }
 
     @FXML
@@ -41,6 +47,7 @@ public class BorrarTelefonoPacienteController
         // Cerrar el Stage
         stage.close();
     }
+
     private void limpiarCampos() {
         TextFieldCedula.clear();
         TextFieldTelefono.clear();

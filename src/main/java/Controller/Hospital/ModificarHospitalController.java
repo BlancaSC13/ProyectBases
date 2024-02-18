@@ -2,6 +2,7 @@ package Controller.Hospital;
 
 import DAO.HospitalDAO;
 import Objects.Hospital;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -35,10 +36,15 @@ public class ModificarHospitalController {
         hospital.setId(Integer.parseInt(TextFieldIdHospital.getText()));
         hospital.setNombre(TextFieldNombreHospital.getText());
         hospital.setDireccion(TextFieldDireccionHospital.getText());
-        if (hospitalDAO.actualizarHospital(hospital)) {
-            mostrarMensaje("Registro actualizado con éxito");
-        } else {
-            mostrarMensaje("No se pudo actualizar el registro porque no existe.");
+        String respuesta = FXUtility.alertYesNo("Confimación", "Modificar registro","¿Está seguro de modificar el registro?");
+        if (respuesta.equals("YES")) {
+            if (hospitalDAO.actualizarHospital(hospital)) {
+                mostrarMensaje("Registro actualizado con éxito");
+            } else {
+                mostrarMensaje("No se pudo actualizar el registro porque no existe.");
+            }
+        }else{
+            mostrarMensaje("Registro no modificado.");
         }
         limpiarCampos();
     }

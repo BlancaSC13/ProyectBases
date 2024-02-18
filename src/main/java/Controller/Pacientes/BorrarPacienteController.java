@@ -2,6 +2,7 @@ package Controller.Pacientes;
 
 import DAO.PacienteDAO;
 import Objects.Paciente;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -26,9 +27,14 @@ public class BorrarPacienteController {
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
         int id_Obtenido = Integer.parseInt(TextFieldCedula.getText());
-        pacienteDAO.borrarpaciente(id_Obtenido);
-        mostrarMensaje("Registro de Paciente borrado correctamente");
-        limpiarCampos();
+        String respuesta = FXUtility.alertYesNo("Confirmación", "Eliminar registro", "¿Está seguro de eliminar el registro del paciente?");
+        if(respuesta.equals("YES")) {
+            pacienteDAO.borrarpaciente(id_Obtenido);
+            mostrarMensaje("Registro de Paciente eliminado correctamente");
+            limpiarCampos();
+        }else{
+            mostrarMensaje("Registro no eliminado");
+        }
     }
 
     @FXML

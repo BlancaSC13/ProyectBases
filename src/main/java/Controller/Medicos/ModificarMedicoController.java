@@ -2,6 +2,7 @@ package Controller.Medicos;
 
 import DAO.MedicoDAO;
 import Objects.Medico;
+import Util.FXUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -42,10 +43,15 @@ public class ModificarMedicoController {
         medico.setApellido1(TextFieldPrimerApellido.getText());
         medico.setApellido2(TextFieldSegundoApellido.getText());
         medico.setFec_Nacimiento(TextFieldFecNA.getText());
-        if (medicoDAO.actualizarMedico(medico)) {
-            mostrarMensaje("Registro actualizado con éxito");
-        } else {
-            mostrarMensaje("No se pudo actualizar el registro porque no existe.");
+        String respuesta = FXUtility.alertYesNo("Confimación", "Modificar registro","¿Está seguro de modificar el registro?");
+        if(respuesta.equals("YES")) {
+            if (medicoDAO.actualizarMedico(medico)) {
+                mostrarMensaje("Registro actualizado con éxito");
+            } else {
+                mostrarMensaje("No se pudo actualizar el registro porque no existe.");
+            }
+        }else{
+            mostrarMensaje("Registro no actualizado");
         }
         limpiarCampos();
     }
