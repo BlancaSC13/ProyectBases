@@ -4,14 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import ucr.proyectbases.HelloApplication;
 
 import java.io.IOException;
 
 public class MenuMedicoController {
+
     @javafx.fxml.FXML
     public void initialize() {
+
     }
 
     @FXML

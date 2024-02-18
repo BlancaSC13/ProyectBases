@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CrearHospitalController {
     @javafx.fxml.FXML
@@ -21,7 +22,10 @@ public class CrearHospitalController {
 
     @FXML
     void BtnCancelar(ActionEvent event) {
-
+        // Obtener la referencia del Stage actual
+        Stage stage = (Stage) ((javafx.scene.control.Button) event.getSource()).getScene().getWindow();
+        // Cerrar el Stage
+        stage.close();
     }
 
     @FXML

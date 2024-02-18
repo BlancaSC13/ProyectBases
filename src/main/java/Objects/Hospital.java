@@ -34,10 +34,8 @@ public class Hospital {
 
     @Override
     public String toString() {
-        return "Hospital{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
+        return "Id Hospital: " + id +
+                "\n\nNombre: " + nombre +
+                "\n\nDireccion: " + direccion;
     }
 }
