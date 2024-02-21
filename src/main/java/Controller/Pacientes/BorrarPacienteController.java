@@ -23,17 +23,20 @@ public class BorrarPacienteController {
     public void initialize() {
     }
 
-
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
-        int id_Obtenido = Integer.parseInt(TextFieldCedula.getText());
-        String respuesta = FXUtility.alertYesNo("Confirmación", "Eliminar registro", "¿Está seguro de eliminar el registro del paciente?");
-        if(respuesta.equals("YES")) {
-            pacienteDAO.borrarpaciente(id_Obtenido);
-            mostrarMensaje("Registro de Paciente eliminado correctamente");
-            limpiarCampos();
-        }else{
-            mostrarMensaje("Registro no eliminado");
+        if (TextFieldCedula.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato");
+        } else {
+            int id_Obtenido = Integer.parseInt(TextFieldCedula.getText());
+            String respuesta = FXUtility.alertYesNo("Confirmación", "Eliminar registro", "¿Está seguro de eliminar el registro del paciente?");
+            if (respuesta.equals("YES")) {
+                pacienteDAO.borrarpaciente(id_Obtenido);
+                mostrarMensaje("Registro de Paciente eliminado correctamente");
+                limpiarCampos();
+            } else {
+                mostrarMensaje("Registro no eliminado");
+            }
         }
     }
 
@@ -47,12 +50,17 @@ public class BorrarPacienteController {
 
     @FXML
     void BtnLeerOnAction(ActionEvent event) {
-        int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
-        paciente = pacienteDAO.obtenerPaciente(cedula_Obtenida);
-        if (paciente.getCedula() != 0) {
-            TextAreaInfo.setText(paciente.toString());
+        limpiarCampos();
+        if (TextFieldCedula.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato para buscar");
         } else {
-            mostrarMensaje("Registro no existente");
+            int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
+            paciente = pacienteDAO.obtenerPaciente(cedula_Obtenida);
+            if (paciente.getCedula() != 0) {
+                TextAreaInfo.setText(paciente.toString());
+            } else {
+                mostrarMensaje("Registro no existente");
+            }
         }
     }
 

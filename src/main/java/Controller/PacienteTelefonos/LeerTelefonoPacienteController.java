@@ -1,7 +1,7 @@
-package Controller.Hospital;
+package Controller.PacienteTelefonos;
 
-import DAO.HospitalDAO;
-import Objects.Hospital;
+import DAO.TelefonoPacienteDAO;
+import Objects.TelefonoPaciente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,13 +9,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LeerHospitalController {
+import java.util.List;
+
+public class LeerTelefonoPacienteController {
     @javafx.fxml.FXML
-    private TextField TextFieldIDHospital;
+    private TextField TextFieldCedula;
     @javafx.fxml.FXML
     private TextArea TextAreaInfo;
-    private HospitalDAO hospitalDAO = new HospitalDAO();
-    private Hospital hospital = new Hospital();
+    private TelefonoPacienteDAO telefonoPacienteDAO = new TelefonoPacienteDAO();
 
     @javafx.fxml.FXML
     public void initialize() {
@@ -32,21 +33,17 @@ public class LeerHospitalController {
     @FXML
     void BtnLeerOnAction(ActionEvent event) {
         limpiarCampos();
-        if (TextFieldIDHospital.getText().isEmpty()) {
+        if (TextFieldCedula.getText().isEmpty()){
             mostrarMensaje("Por favor ingrese un dato para buscar");
-        } else {
-            int id_Obtenido = Integer.parseInt(TextFieldIDHospital.getText());
-            hospital = hospitalDAO.obtenerHospital(id_Obtenido);
-            if (this.hospital != null) {
-                TextAreaInfo.setText(hospital.toString());
-            } else {
+        }else {
+            int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
+            List<TelefonoPaciente> telefonosPaciente = telefonoPacienteDAO.obtenerTelefonos(cedula_Obtenida);
+            if (telefonosPaciente.isEmpty()) {
                 mostrarMensaje("Registro no existente");
+            } else {
+                TextAreaInfo.setText(telefonosPaciente.toString());
             }
         }
-    }
-
-    private void limpiarCampos() {
-        TextAreaInfo.clear();
     }
 
     private void mostrarMensaje(String mensaje) {
@@ -56,4 +53,9 @@ public class LeerHospitalController {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
+
+    private void limpiarCampos() {
+        TextAreaInfo.clear();
+    }
+
 }

@@ -28,15 +28,19 @@ public class BorrarTelefonoPacienteController {
 
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
-        telefonoPaciente.setCedula(Integer.parseInt(TextFieldCedula.getText()));
-        telefonoPaciente.setTelefono(Integer.parseInt(TextFieldTelefono.getText()));
-        String respuesta = FXUtility.alertYesNo("Confirmación", "Borrar Registro", "¿Está seguro de eliminar el registro?");
-        if (respuesta.equals("YES")) {
-            telefonoPacienteDAO.borrarTelefonoPaciente(telefonoPaciente);
-            mostrarMensaje("El número de teléfono se borró correctamente");
-            limpiarCampos();
+        if (TextFieldCedula.getText().isEmpty() || TextFieldTelefono.getText().isEmpty()) {
+            mostrarMensaje("Por favor complete los datos");
         } else {
-            mostrarMensaje("Registro no eliminado");
+            telefonoPaciente.setCedula(Integer.parseInt(TextFieldCedula.getText()));
+            telefonoPaciente.setTelefono(Integer.parseInt(TextFieldTelefono.getText()));
+            String respuesta = FXUtility.alertYesNo("Confirmación", "Borrar Registro", "¿Está seguro de eliminar el registro?");
+            if (respuesta.equals("YES")) {
+                telefonoPacienteDAO.borrarTelefonoPaciente(telefonoPaciente);
+                mostrarMensaje("El número de teléfono se borró correctamente");
+                limpiarCampos();
+            } else {
+                mostrarMensaje("Registro no eliminado");
+            }
         }
     }
 

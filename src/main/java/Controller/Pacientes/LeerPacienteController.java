@@ -9,8 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LeerPacienteController
-{
+public class LeerPacienteController {
     @javafx.fxml.FXML
     private TextField TextFieldCedula;
     @javafx.fxml.FXML
@@ -21,6 +20,7 @@ public class LeerPacienteController
     @javafx.fxml.FXML
     public void initialize() {
     }
+
     @FXML
     void BtnCancelarOnAction(ActionEvent event) {
         // Obtener la referencia del Stage actual
@@ -32,17 +32,23 @@ public class LeerPacienteController
     @FXML
     void BtnLeerOnAction(ActionEvent event) {
         limpiarCampos();
-        int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
-        paciente = pacienteDAO.obtenerPaciente(cedula_Obtenida);
-        if(paciente.getCedula()!= 0) {
-            TextAreaInfo.setText(paciente.toString());
-        }else{
-            mostrarMensaje("Registro no existente");
+        if (TextFieldCedula.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato para buscar");
+        } else {
+            int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
+            paciente = pacienteDAO.obtenerPaciente(cedula_Obtenida);
+            if (paciente.getCedula() != 0) {
+                TextAreaInfo.setText(paciente.toString());
+            } else {
+                mostrarMensaje("Registro no existente");
+            }
         }
     }
+
     private void limpiarCampos() {
         TextAreaInfo.clear();
     }
+
     private void mostrarMensaje(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Información");

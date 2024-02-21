@@ -1,7 +1,11 @@
 package Controller.HospitalMedicos;
 
+import DAO.HospitalDAO;
+import DAO.HospitalMedicoDAO;
+import Objects.HospitalMedico;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -9,9 +13,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class BuscarHospitalMedicoController
-{
+
+public class BuscarHospitalMedicoController {
     @FXML
     private ComboBox<String> ComboBoxDato;
 
@@ -23,6 +29,7 @@ public class BuscarHospitalMedicoController
 
     @FXML
     private TextArea TextAreaInfo;
+    private HospitalMedicoDAO hospitalMedicoDAO = new HospitalMedicoDAO();
 
     @FXML
     public void initialize() {
@@ -40,23 +47,30 @@ public class BuscarHospitalMedicoController
 
     @FXML
     void BtnBuscarOnAction(ActionEvent event) {
-
+        limpiarCampos();
         String datoSeleccionado = ComboBoxDato.getValue();
         String idHospital = TextFieldIDHospital.getText();
         String cedulaMedico = TextFieldCedula.getText();
-
-        if (datoSeleccionado != null && !idHospital.isEmpty() && !cedulaMedico.isEmpty()) {
-            // Dependiendo de tu lógica de búsqueda, puedes utilizar los datos proporcionados
-            // para buscar en tu base de datos o realizar cualquier otra acción.
-            String resultado = "Realizar búsqueda con:\nDato: " + datoSeleccionado + "\nID Hospital: " + idHospital + "\nCédula Médico: " + cedulaMedico;
-            TextAreaInfo.setText(resultado);
-        } else {
-            // Mensaje de error si no se proporcionan todos los datos necesarios
-            TextAreaInfo.setText("Error: Todos los campos deben estar llenos");
+        List<HospitalMedico> datosObtenidos;
+        if (datoSeleccionado.equals("Buscar por ID Hospital") && !idHospital.isEmpty()) {
+            datosObtenidos = hospitalMedicoDAO.obtenerHospitalMedico(Integer.parseInt(idHospital));
+            if (datosObtenidos.isEmpty()) {
+                mostrarMensaje("Registro no existente");
+            } else {
+                TextAreaInfo.setText(datosObtenidos.toString());
+            }
+        } else if (datoSeleccionado.equals("Buscar por Cédula del Médico") && !cedulaMedico.isEmpty()) {
+            datosObtenidos = hospitalMedicoDAO.obtenerHospitalMedico2(Integer.parseInt(cedulaMedico));
+            if (datosObtenidos.isEmpty()) {
+                mostrarMensaje("Registro no existente");
+            } else {
+                TextAreaInfo.setText(datosObtenidos.toString());
+            }
+        }else{
+            mostrarMensaje("Por favor ingrese un dato válido");
         }
+
     }
-
-
 
 
     @FXML
@@ -66,4 +80,18 @@ public class BuscarHospitalMedicoController
         // Cerrar el Stage
         stage.close();
 
-    }}
+    }
+
+    private void mostrarMensaje(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Información");
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+    private void limpiarCampos() {
+        TextAreaInfo.clear();
+    }
+
+}

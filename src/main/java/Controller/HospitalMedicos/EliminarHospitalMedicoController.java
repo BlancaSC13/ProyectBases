@@ -13,8 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EliminarHospitalMedicoController
-{
+public class EliminarHospitalMedicoController {
     @javafx.fxml.FXML
     private TextField TextFieldIDHospital;
     @javafx.fxml.FXML
@@ -33,6 +32,7 @@ public class EliminarHospitalMedicoController
     @javafx.fxml.FXML
     public void initialize() {
     }
+
     @FXML
     void BtnCancelarOnAction(ActionEvent event) {
         // Obtener la referencia del Stage actual
@@ -44,16 +44,19 @@ public class EliminarHospitalMedicoController
 
     @FXML
     void BtnEliminarOnAction(ActionEvent event) {
-
-        hospitalMedico.setId_Hospital(Integer.parseInt(TextFieldIDHospital.getText()));
-        hospitalMedico.setCedula(Integer.parseInt(TextFieldCedula.getText()));
-        String respuesta = FXUtility.alertYesNo("Confirmación", "Borrar Registro", "¿Está seguro de eliminar el registro?");
-        if (respuesta.equals("YES")) {
-            hospitalMedicoDAO.borrarHospitalMedico(hospitalMedico);
-            mostrarMensaje("El eliminaron los datos de forma correcta");
-            limpiarCampos();
+        if (TextFieldIDHospital.getText().isEmpty() || TextFieldIDHospital.getText().isEmpty()) {
+            mostrarMensaje("Por favor complete los datos");
         } else {
-            mostrarMensaje("Registro no eliminado");
+            hospitalMedico.setId_Hospital(Integer.parseInt(TextFieldIDHospital.getText()));
+            hospitalMedico.setCedula(Integer.parseInt(TextFieldCedula.getText()));
+            String respuesta = FXUtility.alertYesNo("Confirmación", "Borrar Registro", "¿Está seguro de eliminar el registro?");
+            if (respuesta.equals("YES")) {
+                hospitalMedicoDAO.borrarHospitalMedico(hospitalMedico);
+                mostrarMensaje("El eliminaron los datos de forma correcta");
+                limpiarCampos();
+            } else {
+                mostrarMensaje("Registro no eliminado");
+            }
         }
 
     }

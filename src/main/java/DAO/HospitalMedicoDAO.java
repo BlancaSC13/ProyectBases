@@ -87,35 +87,51 @@ public class HospitalMedicoDAO {
 
 
 
-    public List<HospitalMedico> obtenerHospitalMedico() {
-        List<HospitalMedico> listaHospitalMedico = new ArrayList<>();
+    public List<HospitalMedico> obtenerHospitalMedico(int idHospital) {
+        List<HospitalMedico> medicos = new ArrayList<>();
 
-        try {
-            Connection conexion = Conexion.obtenerConexion();
+        try (Connection conexion = Conexion.obtenerConexion();
+             PreparedStatement preparedStatement = conexion.prepareStatement("SELECT * FROM Medico_Hospital WHERE Id_Hospital = ?")) {
 
-            if (conexion != null) {
-                String SELECT_SQL = "SELECT * FROM Medico_Hospital";
+            preparedStatement.setInt(1, idHospital);
 
-                try (PreparedStatement preparedStatement = conexion.prepareStatement(SELECT_SQL)) {
-                    ResultSet resultSet = preparedStatement.executeQuery();
-
-                    while (resultSet.next()) {
-                        HospitalMedico hospitalMedico = new HospitalMedico();
-                        hospitalMedico.setId_Hospital(resultSet.getInt("Id_Hospital"));
-                        hospitalMedico.setCedula(resultSet.getInt("Cedula"));
-
-                        listaHospitalMedico.add(hospitalMedico);
-                    }
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    HospitalMedico hospitalMedico = new HospitalMedico();
+                    hospitalMedico.setId_Hospital(resultSet.getInt("Id_Hospital"));
+                    hospitalMedico.setCedula(resultSet.getInt("Cedula"));
+                    medicos.add(hospitalMedico);
                 }
-            } else {
-                System.out.println("Error: la conexión es nula");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return listaHospitalMedico;
+        return medicos;
     }
+    public List<HospitalMedico> obtenerHospitalMedico2(int cedula) {
+        List<HospitalMedico> hospitales = new ArrayList<>();
+
+        try (Connection conexion = Conexion.obtenerConexion();
+             PreparedStatement preparedStatement = conexion.prepareStatement("SELECT * FROM Medico_Hospital WHERE Cedula = ?")) {
+
+            preparedStatement.setInt(1, cedula);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    HospitalMedico hospitalMedico = new HospitalMedico();
+                    hospitalMedico.setId_Hospital(resultSet.getInt("Id_Hospital"));
+                    hospitalMedico.setCedula(resultSet.getInt("Cedula"));
+                    hospitales.add(hospitalMedico);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hospitales;
+    }
+
 }
 
 

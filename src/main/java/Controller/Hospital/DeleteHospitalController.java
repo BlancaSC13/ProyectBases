@@ -24,13 +24,17 @@ public class DeleteHospitalController {
 
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
-        int id_Obtenido = Integer.parseInt(TextFieldIdHospital.getText());
-        String respuesta = FXUtility.alertYesNo("Confimación", "Eliminar registro","¿Está seguro de eliminar el registro?");
-        if(respuesta.equals("YES")) {
-            hospitalDAO.borrarHospital(id_Obtenido);
-            mostrarMensaje("Registro de hospital eliminado correctamente");
-        }else{
-            mostrarMensaje("Registro no eliminado");
+        if (TextFieldIdHospital.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato");
+        } else {
+            int id_Obtenido = Integer.parseInt(TextFieldIdHospital.getText());
+            String respuesta = FXUtility.alertYesNo("Confimación", "Eliminar registro", "¿Está seguro de eliminar el registro?");
+            if (respuesta.equals("YES")) {
+                hospitalDAO.borrarHospital(id_Obtenido);
+                mostrarMensaje("Registro de hospital eliminado correctamente");
+            } else {
+                mostrarMensaje("Registro no eliminado");
+            }
         }
         limpiarCampos();
 
@@ -47,12 +51,16 @@ public class DeleteHospitalController {
     @FXML
     void BtnCargarOnAction(ActionEvent event) {
         limpiarCampos();
-        int id_Obtenido = Integer.parseInt(TextFieldIdHospital.getText());
-        hospital = hospitalDAO.obtenerHospital(id_Obtenido);
-        if(hospital!= null) {
-            TextAreaInfo.setText(hospital.toString());
-        }else{
-            mostrarMensaje("Registro no existente");
+        if (TextFieldIdHospital.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato para buscar");
+        } else {
+            int id_Obtenido = Integer.parseInt(TextFieldIdHospital.getText());
+            hospital = hospitalDAO.obtenerHospital(id_Obtenido);
+            if (this.hospital != null) {
+                TextAreaInfo.setText(hospital.toString());
+            } else {
+                mostrarMensaje("Registro no existente");
+            }
         }
     }
 

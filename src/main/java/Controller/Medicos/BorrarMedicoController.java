@@ -17,7 +17,7 @@ public class BorrarMedicoController {
     @javafx.fxml.FXML
     private TextArea TextAreaInfo;
 
-    private MedicoDAO medicoDAO= new MedicoDAO();
+    private MedicoDAO medicoDAO = new MedicoDAO();
     private Medico medico = new Medico();
 
 
@@ -27,13 +27,17 @@ public class BorrarMedicoController {
 
     @FXML
     void BtnBorrarOnAction(ActionEvent event) {
-        int id_Obtenido = Integer.parseInt(TextFieldCedula.getText());
-        String respuesta = FXUtility.alertYesNo("Confimación", "Eliminar registro","¿Está seguro de eliminar el registro?");
-        if(respuesta.equals("YES")) {
-            medicoDAO.borrarMedico(id_Obtenido);
-            mostrarMensaje("Medico borrado correctamente");
-        }else{
-            mostrarMensaje("Registro no eliminado");
+        if (TextFieldCedula.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato");
+        } else {
+            int id_Obtenido = Integer.parseInt(TextFieldCedula.getText());
+            String respuesta = FXUtility.alertYesNo("Confimación", "Eliminar registro", "¿Está seguro de eliminar el registro?");
+            if (respuesta.equals("YES")) {
+                medicoDAO.borrarMedico(id_Obtenido);
+                mostrarMensaje("Medico borrado correctamente");
+            } else {
+                mostrarMensaje("Registro no eliminado");
+            }
         }
         limpiarCampos();
     }
@@ -48,17 +52,24 @@ public class BorrarMedicoController {
 
     @FXML
     void BtnLeerOnAction(ActionEvent event) {
-        int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
-        medico = medicoDAO.obtenerMedico(cedula_Obtenida);
-        if(medico.getCedula()!= 0) {
-            TextAreaInfo.setText(medico.toString());
-        }else{
-            mostrarMensaje("Registro no existente");
+        limpiarCampos();
+        if (TextFieldCedula.getText().isEmpty()) {
+            mostrarMensaje("Por favor ingrese un dato para buscar");
+        } else {
+            int cedula_Obtenida = Integer.parseInt(TextFieldCedula.getText());
+            medico = medicoDAO.obtenerMedico(cedula_Obtenida);
+            if (medico.getCedula() != 0) {
+                TextAreaInfo.setText(medico.toString());
+            } else {
+                mostrarMensaje("Registro no existente");
+            }
         }
     }
+
     private void limpiarCampos() {
         TextAreaInfo.clear();
     }
+
     private void mostrarMensaje(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Información");

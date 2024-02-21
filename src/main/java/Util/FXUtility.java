@@ -9,14 +9,7 @@ import ucr.proyectbases.HelloApplication;
 import java.util.Optional;
 
 public class FXUtility {
-    private static void mostrarMensaje(String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Información");
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
-    public static String alertYesNo(String title, String headerText, String contextText){
+      public static String alertYesNo(String title, String headerText, String contextText){
         Alert myalert = new Alert(Alert.AlertType.CONFIRMATION);
         myalert.setTitle(title);
         myalert.setHeaderText(headerText);
