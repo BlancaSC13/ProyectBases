@@ -35,7 +35,12 @@
                               <Font name="Lucida Bright Demibold Italic" size="16.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Cédula:">
+                        <Text layoutX="10.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Nuevo Id Hospital:">
+                           <font>
+                              <Font name="Lucida Bright Demibold Italic" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0);" text="Cédula:">
                            <font>
                               <Font name="Lucida Bright Demibold Italic" size="16.0" />
                            </font>
@@ -47,7 +52,8 @@
                   </VBox>
                   <VBox prefHeight="227.0" prefWidth="133.0" spacing="29.0">
                      <children>
-                        <TextField fx:id="TextFieldIDHospital" layoutX="10.0" layoutY="10.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
+                        <TextField fx:id="TextFieldIDHospitalViejo" layoutX="10.0" layoutY="10.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
+                        <TextField fx:id="TextFieldIDHospital" layoutX="10.0" layoutY="74.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
                         <TextField fx:id="TextFieldCedula" layoutX="10.0" layoutY="74.0" style="-fx-effect: dropshadow(gaussian,  gray, 15, 0.3, 1, 0); -fx-background-radius: 10 10 10 10; -fx-border-radius: 10 10 10 10;" />
                      </children>
                      <padding>
